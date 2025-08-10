@@ -1,0 +1,18 @@
+sequenceDiagram
+  participant U as User (terminal)
+  participant CLI as main.py (ACP Client)
+  participant Critic as Literary Critic (:8002)
+  participant Archivist as Archivist (:8001)
+  participant FS as data/ + metadata
+
+  U->>CLI: "/list"
+  CLI->>Critic: ACP run_sync("List the available books.")
+  Critic->>FS: scan data/*.txt
+  Critic-->>CLI: book keys
+  CLI-->>U: display keys
+
+  U->>CLI: "/use archivist" + "Who is Captain Ahab?" + book: mobydick
+  CLI->>Archivist: ACP run_sync(JSON{"book_title":"mobydick","query":"..."})
+  Archivist->>FS: RagTool add+retrieve on mobydick.txt
+  Archivist-->>CLI: grounded answer
+  CLI-->>U: display answer

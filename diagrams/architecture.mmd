@@ -1,0 +1,19 @@
+flowchart LR
+  subgraph client_subgraph[Client]
+    CLI["main.py (ACP Client)"]
+  end
+  subgraph servers_subgraph[Servers]
+    A["smolagents_server.py<br/>Literary Critic (ACP Server :8002)"]
+    B["crew_agent_server.py<br/>Archivist (ACP Server :8001)"]
+    C["mcpserver.py<br/>Catalog (ACP Server :8003, optional)"]
+  end
+  D["data/*.txt<br/>book_metadata.json"]
+
+  CLI -- "ACP HTTP" --> A
+  CLI -- "ACP HTTP" --> B
+  CLI -- "ACP HTTP" --> C
+  %% Discovery paths (either/or)
+  A -- "tools: list/get_meta (local mode)" --> D
+  A -- "tools: list/get_meta (MCP mode)" --> C
+  A -- "tool: archivist_agent(JSON)" --> B
+  B -- "RagTool" --> D

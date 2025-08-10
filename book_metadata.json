@@ -1,0 +1,71 @@
+{
+    "frankenstein": {
+        "title": "Frankenstein; or, The Modern Prometheus",
+        "author": "Mary Shelley",
+        "publication_year": 1818,
+        "genre": "Gothic fiction",
+        "summary": "The novel tells the story of Victor Frankenstein, a young scientist who creates a sapient creature in an unorthodox scientific experiment.",
+        "key_themes": [
+            "dangers of ambition",
+            "alienation and loneliness",
+            "nature vs. nurture",
+            "responsibility and guilt"
+        ],
+        "filename": "frankenstein.txt"
+    },
+    "dracula": {
+        "title": "Dracula",
+        "author": "Bram Stoker",
+        "publication_year": 1897,
+        "genre": "Gothic horror",
+        "summary": "An epistolary novel, it relates the story of Dracula's attempt to move from Transylvania to England so that he may find new blood and spread the undead curse.",
+        "key_themes": [
+            "sexuality and desire",
+            "good vs. evil",
+            "modernity vs. tradition",
+            "Christian salvation"
+        ],
+        "filename": "dracula.txt"
+    },
+    "mobydick": {
+        "title": "Moby-Dick; or, The Whale",
+        "author": "Herman Melville",
+        "publication_year": 1851,
+        "genre": "Adventure fiction",
+        "summary": "The narrative of Ishmael's whaling voyage on the Pequod, commanded by the obsessive Captain Ahab who seeks revenge on the white whale Moby Dick.",
+        "key_themes": [
+            "obsession and revenge",
+            "fate vs. free will",
+            "man vs. nature",
+            "knowledge and ignorance"
+        ],
+        "filename": "mobydick.txt"
+    },
+    "prideandprejudice": {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "publication_year": 1813,
+        "genre": "Romantic fiction",
+        "summary": "Elizabeth Bennet navigates issues of manners, upbringing, morality, education, and marriage in the society of the landed gentry of early 19th-century England.",
+        "key_themes": [
+            "love and marriage",
+            "class and social status",
+            "pride and prejudice",
+            "reputation"
+        ],
+        "filename": "prideandprejudice.txt"
+    },
+    "sherlockholmes": {
+        "title": "The Adventures of Sherlock Holmes",
+        "author": "Arthur Conan Doyle",
+        "publication_year": 1892,
+        "genre": "Detective fiction",
+        "summary": "A collection of twelve short stories featuring Sherlock Holmes, the world's most famous consulting detective, and his friend Dr. Watson.",
+        "key_themes": [
+            "logic and deduction",
+            "justice",
+            "appearance vs. reality"
+        ],
+        "filename": "sherlockholmes.txt"
+    }
+}
