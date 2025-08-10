@@ -2,7 +2,7 @@
 
 A multi-agent system for analyzing books using a tool-calling orchestrator (Smolagents) with a factual RAG archivist (CrewAI).
 
-## Why this repo? An ACP showcase for multi-framework agents
+## An ACP showcase for multi-framework agents
 
 This project demonstrates how to use the ACP protocol to orchestrate agents implemented in different frameworks, all talking over a common, framework-agnostic runtime.
 
@@ -33,9 +33,12 @@ This cleanly separates concerns: any ACP-capable client can call either agent, a
 
 Python 3.11+ and environment variables for your LLM provider (e.g., OpenAI) set so `smolagents` and `crewai` can authenticate.
 
+We use `uv` for dependency management and running apps.
+
 ## Quickstart (Makefile)
 
 From `ai_librarian/` you can use:
+
 ```bash
 make install         # uv sync
 make start-archivist # port 8001
@@ -49,14 +52,14 @@ make start-all       # tmux: archivist + critic
 make start-all-mcp   # tmux: archivist + catalog + critic (MCP-backed discovery)
 ```
 
-Rendered PNG (if generated):
+Diagrams:
 
 ![Architecture](diagrams/architecture.png)
 
-## Install deps
+## Install deps (with uv)
 
 ```bash
-pip install -e .
+uv sync
 ```
 
 ## Step-by-step: Run the services
@@ -86,10 +89,12 @@ python ai_librarian/mcpserver.py
 You can have the Critic use the Catalog over ACP (instead of scanning the filesystem directly). This mirrors the @my_acp_project pattern.
 
 Options for the Catalog data source:
+
 - Local JSON (default): `ai_librarian/book_metadata.json`
 - Remote JSON: set `BOOK_METADATA_URL` to a GitHub raw URL
 
 Run all with tmux:
+
 ```bash
 make start-all-mcp
 # or manually in 3 terminals:
@@ -157,26 +162,28 @@ Drop additional `.txt` files into `ai_librarian/data/`. The critic will automati
 - **Modular tooling** — Clear tool boundaries: listing, metadata lookup, text-grounded answers, and web context.
 - **Developer UX** — Interactive CLI that showcases routing requests to different agents and payload shaping for agent-specific schemas.
 
-## Architecture (Mermaid)
+## Architecture
 
 ```mermaid
 flowchart LR
   subgraph Client
-    CLI[main.py (ACP Client)]
+    CLI["main.py (ACP Client)"]
   end
   subgraph Servers
-    A[smolagents_server.py\nLiterary Critic (ACP Server :8002)]
-    B[crew_agent_server.py\nArchivist (ACP Server :8001)]
-    C[mcpserver.py\nCatalog (ACP Server :8003, optional)]
+    A["smolagents_server.py<br/>Literary Critic (ACP Server :8002)"]
+    B["crew_agent_server.py<br/>Archivist (ACP Server :8001)"]
+    C["mcpserver.py<br/>Catalog (ACP Server :8003, optional)"]
   end
-  D[data/*.txt\nbook_metadata.json]
+  D["data/*.txt<br/>book_metadata.json"]
 
-  CLI -- ACP HTTP --> A
-  CLI -- ACP HTTP --> B
-  CLI -- ACP HTTP --> C
-  A -- tool: list_available_books/get_book_metadata --> D
-  A -- tool: archivist_agent(JSON) --> B
-  B -- RagTool --> D
+  CLI -- "ACP HTTP" --> A
+  CLI -- "ACP HTTP" --> B
+  CLI -- "ACP HTTP" --> C
+  %% Discovery paths (either/or)
+  A -- "tools: list/get_meta (local mode)" --> D
+  A -- "tools: list/get_meta (MCP mode)" --> C
+  A -- "tool: archivist_agent(JSON)" --> B
+  B -- "RagTool" --> D
 ```
 
 Rendered PNG (if generated):
@@ -206,7 +213,7 @@ sequenceDiagram
   CLI-->>U: display answer
 ```
 
-Rendered PNG (if generated):
+Diagrams:
 
 ![Sequence](diagrams/sequence.png)
 
